@@ -11,16 +11,6 @@ This repository is structured like this:
 - outputs go to `out/` by default
 
 ---
-
-## Why your HO wavefunction tails oscillate (and how we fix it)
-
-Your attached plot shows oscillatory tails far outside the classical turning point.  
-That’s a classic **shooting-method numerical issue**: integrating from one boundary picks up a tiny admixture of the *growing* solution which eventually dominates.
-
-**Fix used here:** integrate from the **origin** with correct **parity** (even/odd), apply **renormalization** during integration to avoid overflow, and use a boundary residual to bracket energies.
-
-You’ll get a clean Gaussian-like ground state.
-
 ---
 
 ## Quickstart
@@ -34,6 +24,23 @@ cargo --version
 ### 1) Run tests (sanity checks)
 ```bash
 cargo test
+```
+
+ You can actually run this way,
+ 
+```
+cargo run --release --bin tise_ho_numerov -- --outdir out/ho
+cargo run --release --bin quarkonium_cornell -- --outdir out/cornell
+
+# widen energy scan window if your defaults are too narrow
+cargo run --release --bin qtraj_bjorken_toy -- --outdir out/toy --e-min -5.0 --e-max -0.000001 --n-steps 400 || true
+
+cargo run --release --bin qtraj_bjorken_raa -- --outdir out/raa --mode hermitian
+cargo run --release --bin qtraj_bjorken_raa -- --outdir out/raa --mode nojump
+cargo run --release --bin qtraj_bjorken_raa -- --outdir out/raa --mode jumps --ntraj 200
+
+cargo run --release --bin wavepacket_free -- --outdir out/wp --frames 120
+ffmpeg -y -framerate 30 -i out/wp/frame_%04d.png -c:v libx264 -pix_fmt yuv420p -crf 22 out/wp.mp4
 ```
 
 ### 2) Harmonic oscillator eigenvalues + wavefunction (Numerov)
@@ -64,8 +71,6 @@ Convert frames → GIF (small demos; larger files than mp4):
 ```bash
 magick -delay 3 -loop 0 out/wp_frames/frame_*.png out/wavepacket.gif
 ```
-
----
 
 ## Quarkonium / Cornell potential (vacuum + screened medium)
 
