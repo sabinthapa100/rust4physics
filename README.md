@@ -3,7 +3,7 @@
 **Sabin Thapa** (Kent State University, PhD student) — `sthapa3@kent.edu`  
 A small, fast, reproducible **physics lab in Rust**, motivated by quarkonium / Schrödinger numerics (and inspired by QTraj-style workflows).
 
-This repository is structured like a “senior-scientist codebase”:
+This repository is structured like this:
 
 - `src/lib.rs` = reusable **toolbox** (numerics + quantum utilities)
 - `src/bin/*.rs` = reproducible **experiments** (each makes plots/data)
