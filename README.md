@@ -132,11 +132,6 @@ These are “guardrails” so the code stays correct as you extend it.
 4) Add GPU kernels (later) using `wgpu` or by offloading heavy linear algebra
 
 ---
-
-## The cargo bin error you saw
-
-`error: no bin target named tise_ho_numerov` means Cargo cannot *see* the file.
-
 Cargo discovers bins from:
 - `src/main.rs` (default bin named `rust4physics`)
 - `src/bin/*.rs` (each file = one bin target)
