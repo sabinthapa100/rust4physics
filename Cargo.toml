@@ -1,0 +1,17 @@
+[package]
+name = "rust4physics"
+version = "0.2.0"
+edition = "2021"
+license = "MIT"
+description = "Rust4Physics: reproducible physics simulations + visualization in Rust (quarkonium + wavepackets)"
+repository = "https://github.com/sabinthapa100/rust4physics"
+
+[dependencies]
+anyhow = "1.0"
+clap = { version = "4.5", features = ["derive"] }
+plotters = "0.3"
+num-complex = "0.4"
+rand = "0.8"
+
+[dev-dependencies]
+approx = "0.5"
